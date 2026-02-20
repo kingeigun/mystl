@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(mystl main.cpp
         src/list.h
         test/test_list.h
+        src/hash_map.h
 )

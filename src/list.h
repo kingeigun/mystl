@@ -53,8 +53,13 @@ namespace mystl {
         void debug_info() {
             if (DEBUG_MODE) {
                 std::cout << "[DEBUG] size = " << _size << "\t";
-                std::cout << "[DEBUG] head->data = " << head->data << "\t";
-                std::cout << "[DEBUG] tail->data = " << tail->data << "\t";
+                if (head == nullptr) {
+                    std::cout << "[DEBUG] head->data = nullptr" << "\t";
+                    std::cout << "[DEBUG] tail->data = nullptr" << "\t";
+                } else {
+                    std::cout << "[DEBUG] head->data = " << head->data << "\t";
+                    std::cout << "[DEBUG] tail->data = " << tail->data << "\t";
+                }
                 std::cout << "[DEBUG] 列表当前结构如下 " << std::endl;
                 ite_from_head([](int data) {
                     std::cout << data << " -> ";
@@ -126,6 +131,48 @@ namespace mystl {
                 debug_info();
             }
             return popped;
+        }
+
+        void remove_nth(size_t n) {
+            if (n > _size || _size == 0) {
+                return;
+            }
+            size_t i = 0;
+            auto tmp = head;
+            while (tmp != nullptr) {
+                if (i == n) {
+                    break;
+                }
+                i++;
+                tmp = tmp->next;
+            }
+
+            if (tmp->next == tmp->prev) {
+                // 删除的是唯一节点
+                delete tmp;
+                _size--;
+                head = tail = nullptr;
+            } else if (tmp->next != nullptr && tmp->prev != nullptr) {
+                // 删除的是中间节点，不影响头尾
+                tmp->prev->next = tmp->next;
+                tmp->next->prev = tmp->prev;
+                delete tmp;
+                _size--;
+            } else if (tmp->next == nullptr) {
+                // 删除的是尾节点
+                tmp->prev->next = nullptr;
+                tail = tmp->prev;
+                delete tmp;
+                _size--;
+            } else if (tmp->prev == nullptr) {
+                // 删除的是头节点
+                tmp->next->prev = nullptr;
+                head = tmp->next;
+                delete tmp;
+                _size--;
+            }
+
+            debug_info();
         }
 
         // 判断列表为空

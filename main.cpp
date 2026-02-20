@@ -15,5 +15,9 @@ int main() {
     t_list.test_pop_front();
     std::cout << "===========================" << "t_list.test_ite_from_head()" << std::endl;
     t_list.test_ite_from_head();
+    std::cout << "===========================" << "t_list.test_remove_nth()" << std::endl;
+    t_list.test_remove_nth();
+    std::cout << "===========================" << "t_list.test_remove_nth_2()" << std::endl;
+    t_list.test_remove_nth_2();
     return 0;
 }

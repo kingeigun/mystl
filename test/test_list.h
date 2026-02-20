@@ -101,6 +101,26 @@ struct test_list {
 
         delete mylist;
     }
+
+    void test_remove_nth() {
+        auto *mylist = new mystl::list<int>();
+        mylist->push_back(1);
+
+        mylist->remove_nth(0);
+
+        delete mylist;
+    }
+
+    void test_remove_nth_2() {
+        auto *mylist = new mystl::list<int>();
+        mylist->push_back(1);
+        mylist->push_back(2);
+
+        mylist->remove_nth(0); // 删除头节点1，剩余节点2
+        mylist->push_back(3);  // 尝试在尾部插入3
+
+        delete mylist;
+    }
 };
 
 #endif
