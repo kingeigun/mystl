@@ -104,7 +104,7 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "main/list.h",
+			"path" : "src/list.h",
 			"sourceGroupIndex" : 1
 		},
 		{
